@@ -25,7 +25,7 @@ textarea, input {
 }
 
 .item-counter.empty {
-  opacity: 50%;
+  opacity: 0.5;
   font-size: 18px;
 }
 
@@ -67,7 +67,7 @@ textarea, input {
 }
 
 .submit-button.disabled {
-  opacity: 30%;
+  opacity: 0.3;
 }
 
 .submit-button:active {
