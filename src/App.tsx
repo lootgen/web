@@ -35,6 +35,7 @@ function App(): JSX.Element {
             <input
               key={`loot-item-$index`}
               maxLength={MAX_CHARACTERS}
+              spellCheck={false}
               ref={(ref) => {
                 if (ref) {
                   inputRefs.current[index] = ref;
