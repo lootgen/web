@@ -68,6 +68,11 @@ textarea, input {
 
 .submit-button.disabled {
   opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.submit-button.disabled:active {
+  background-color: #ffffff;
 }
 
 .submit-button:active {

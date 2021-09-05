@@ -2,11 +2,6 @@ import "./App.css";
 
 import React, { useRef, useState } from "react";
 
-interface Loot {
-  index: number;
-  items: Array<string>;
-}
-
 const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
 const MAX_INDEX = TOTAL_ROWS - 1;
@@ -33,7 +28,7 @@ function App(): JSX.Element {
         <div className="loot-items">
           {items.map((item, index) => (
             <input
-              key={`loot-item-$index`}
+              key={`loot-item-${index}`}
               maxLength={MAX_CHARACTERS}
               spellCheck={false}
               autoCapitalize="on"
@@ -62,13 +57,16 @@ function App(): JSX.Element {
                 }
               }}
               onChange={({ target }) => {
+                if (items[index].length === 0 && target.value.trim().length === 0) {
+                  return;
+                }
                 const newItems = [...items];
                 newItems[index] = target.value;
                 setItems(newItems);
               }}
               onBlur={({ target }) => {
                 const newItems = [...items];
-                newItems[index] = target.value.trimEnd();
+                newItems[index] = target.value.trim();
                 setItems(newItems);
               }}
             />
