@@ -63,7 +63,7 @@ function App(): JSX.Element {
               }}
               onChange={({ target }) => {
                 const newItems = [...items];
-                newItems[index] = target.value;
+                newItems[index] = target.value.trimEnd();
                 setItems(newItems);
               }}
             />
