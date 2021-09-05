@@ -63,6 +63,11 @@ function App(): JSX.Element {
               }}
               onChange={({ target }) => {
                 const newItems = [...items];
+                newItems[index] = target.value;
+                setItems(newItems);
+              }}
+              onBlur={() => {
+                const newItems = [...items];
                 newItems[index] = target.value.trimEnd();
                 setItems(newItems);
               }}
