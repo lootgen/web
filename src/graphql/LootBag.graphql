@@ -1,0 +1,10 @@
+mutation CreateLootBag($items: [String!]!) {
+  createLootBag(input: { items: $items }) {
+    id
+    items {
+      item {
+        name
+      }
+    }
+  }
+}

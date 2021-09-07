@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://MacBook-ESQ.local:4000"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    hooks:
+      afterOneFileWrite:
+        - "eslint --fix"
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
