@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const SERVER_URL = process.env.SERVER_URL ?? "http://localhost:4000";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? "http://localhost:4000";
 
 const APOLLO_CLIENT = new ApolloClient({
   uri: SERVER_URL,
