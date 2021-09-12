@@ -9,10 +9,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   color: #ffffff;
+  font-weight: 500;
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 32px;
 }
 
 h3, a {
@@ -21,7 +22,10 @@ h3, a {
 }
 
 .App {
+  padding: 0;
+  margin: 0;
   display: flex;
+  flex: 1;
   justify-content: center;
 }
 
@@ -37,9 +41,11 @@ textarea, input {
 }
 
 .container {
-  width: 480px;
+  width: 355px;
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .button {
@@ -61,4 +67,16 @@ textarea, input {
 
 .button:active {
   background-color: #888888;
+}
+
+@media (min-width: 641px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  .container {
+    width: 480px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

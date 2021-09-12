@@ -1,14 +1,14 @@
 .item-counter {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 10px;
+  right: 10px;
   color: #fff;
   font-weight: 500;
 }
 
 .item-counter.empty {
   opacity: 0.5;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .loot-view {
@@ -16,24 +16,24 @@
   flex-direction: column;
   position: relative;
   background-color: #000000;
-  width: 480px;
-  height: 480px;
+  width: 355px;
+  height: 355px;
 }
 
 .loot-items {
   display: flex;
   flex-direction: column;
-  margin-top: 36px;
-  padding-left: 24px;
-  padding-right: 24px;
+  margin-top: 22px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .loot-items input {
   padding: 0;
   margin: 0;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   background-color: #000;
-  font-size: 24px;
+  font-size: 18px;
   color: #ffffff;
 }
 
@@ -43,6 +43,38 @@
 
 .submit-button {
   position: absolute;
-  bottom: 24px;
-  right: 24px;
+  bottom: 10px;
+  right: 10px;
+}
+
+@media (min-width: 641px) {
+  .item-counter {
+    top: 24px;
+    right: 24px;
+  }
+
+  .item-counter.empty {
+    font-size: 18px;
+  }
+
+  .loot-view {
+    width: 480px;
+    height: 480px;
+  }
+
+  .loot-items {
+    margin-top: 36px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .loot-items input {
+    margin-bottom: 6px;
+    font-size: 24px;
+  }
+
+  .submit-button {
+    bottom: 24px;
+    right: 24px;
+  }
 }

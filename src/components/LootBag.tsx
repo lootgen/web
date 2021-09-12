@@ -132,6 +132,9 @@ const LootBag: React.FC<Props> = ({
               : 'submit-button button'
           }
           onClick={() => {
+            if (hasEmptyItem) {
+              return;
+            }
             createLootBag({ variables: { items } });
           }}
         >

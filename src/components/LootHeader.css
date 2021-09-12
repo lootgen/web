@@ -1,7 +1,11 @@
+.loot-header {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 .header-links {
   justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .logo {
@@ -23,5 +27,19 @@
 }
 
 .subtitle {
-  margin-bottom: 130px;
+  margin-bottom: 134px;
+}
+
+@media (min-width: 641px) {
+  .loot-header {
+    margin-top: 40px;
+  }
+
+  .header-links {
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    margin-bottom: 130px;
+  }
 }

@@ -3,7 +3,7 @@ import './LootHeader.css';
 
 const LootHeader: React.FC = () => {
   return (
-    <div>
+    <div className="loot-header">
       <div className="row header-links">
         <div className="logo">
           <Link to="/">
