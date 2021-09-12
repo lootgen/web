@@ -49,8 +49,8 @@ textarea, input {
 .button {
   background-color: #ffffff;
   font-weight: 600;
-  font-size: 18px;
-  padding: 6px 10px;
+  font-size: 16px;
+  padding: 4px 8px;
   cursor: pointer;
 }
 
@@ -74,5 +74,10 @@ textarea, input {
 
   .container {
     width: 480px;
+  }
+
+  .button {
+    font-size: 18px;
+    padding: 6px 10px;
   }
 }
