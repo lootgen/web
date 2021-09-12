@@ -1,3 +1,13 @@
+query FetchLootBag($id: Int!) {
+  lootBag(input: { id: $id }) {
+    items {
+      item {
+        name
+      }
+    }
+  }
+}
+
 mutation CreateLootBag($items: [String!]!) {
   createLootBag(input: { items: $items }) {
     id

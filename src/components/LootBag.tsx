@@ -1,23 +1,27 @@
-import "./LootBag.css";
+import './LootBag.css';
 
-import React, { useEffect, useRef, useState } from "react";
-import { useCreateLootBagMutation } from "../generated/graphql";
+import React, { useEffect, useRef, useState } from 'react';
+import { useCreateLootBagMutation } from '../generated/graphql';
 
-const TOTAL_ROWS = 8;
+export const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
 const MAX_INDEX = TOTAL_ROWS - 1;
 const MAX_CHARACTERS = 45;
 
 interface Props {
   itemNames?: string[];
+  bagId?: number;
+  locked?: boolean;
 }
 
 const LootBag: React.FC<Props> = ({
-  itemNames = ["", "", "", "", "", "", "", ""],
+  itemNames = ['', '', '', '', '', '', '', ''],
+  bagId,
+  locked = false,
 }: Props) => {
   const [items, setItems] = useState(itemNames);
   const [pasted, setPasted] = useState(false);
-  const firstEmptyIndex = items.findIndex((value, index) => value.length === 0);
+  const firstEmptyIndex = items.findIndex((value) => value.length === 0);
   const hasEmptyItem = firstEmptyIndex !== -1;
   const inputRefs = useRef<Array<HTMLInputElement>>([]);
   const emptyRows = items.reduce((total, item) => {
@@ -36,14 +40,11 @@ const LootBag: React.FC<Props> = ({
 
   const [createLootBag, { data, loading }] = useCreateLootBagMutation();
 
-  const lootBagId = data?.createLootBag.id;
-  if (lootBagId) {
-    console.log("Loot bag created successfully:", lootBagId);
-  }
+  const lootBagId = data?.createLootBag.id ?? bagId;
 
   return (
     <div className="loot-view">
-      <div className={validRows === 0 ? "item-counter empty" : "item-counter"}>
+      <div className={validRows === 0 ? 'item-counter empty' : 'item-counter'}>
         {lootBagId === undefined
           ? `${validRows}/${MAX_INDEX + 1}`
           : `#${lootBagId}`}
@@ -51,6 +52,7 @@ const LootBag: React.FC<Props> = ({
       <div className="loot-items">
         {items.map((item, index) => (
           <input
+            className={locked || bagId ? 'disabled' : ''}
             key={`loot-item-${index}`}
             maxLength={MAX_CHARACTERS}
             spellCheck={false}
@@ -61,20 +63,25 @@ const LootBag: React.FC<Props> = ({
               }
             }}
             value={item}
-            placeholder={index === firstEmptyIndex ? "Add Loot..." : ""}
+            placeholder={index === firstEmptyIndex ? 'Add Loot...' : ''}
             onKeyDown={({ key }) => {
-              if (key === "ArrowDown" || key.includes("Enter")) {
+              if (key === 'ArrowDown' || key.includes('Enter')) {
                 if (items[index].length > 0 && index < MAX_INDEX) {
                   inputRefs.current[index + 1].focus();
                 }
               }
-              if (key === "ArrowUp") {
+              if (key === 'ArrowUp') {
                 if (index > MIN_INDEX) {
                   inputRefs.current[index - 1].focus();
                 }
               }
             }}
-            onFocus={(event) => {
+            onFocus={() => {
+              if (locked) {
+                inputRefs.current[index].blur();
+                return;
+              }
+
               if (hasEmptyItem && index > firstEmptyIndex) {
                 inputRefs.current[firstEmptyIndex].focus();
               }
@@ -97,8 +104,8 @@ const LootBag: React.FC<Props> = ({
             }}
             onPaste={(event) => {
               const clipboardItems = event.clipboardData
-                .getData("text")
-                .split("\n")
+                .getData('text')
+                .split('\n')
                 .map((item) => item.trim())
                 .filter((item) => item.length > 0);
               if (clipboardItems.length > 0) {
@@ -119,7 +126,7 @@ const LootBag: React.FC<Props> = ({
       {emptyRows < TOTAL_ROWS && lootBagId === undefined && (
         <div
           className={
-            hasEmptyItem || loading ? "submit-button disabled" : "submit-button"
+            hasEmptyItem || loading ? 'submit-button disabled' : 'submit-button'
           }
           onClick={() => {
             createLootBag({ variables: { items } });

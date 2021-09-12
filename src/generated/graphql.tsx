@@ -66,6 +66,13 @@ export type QueryLootBagArgs = {
   input: FetchLootBagInput;
 };
 
+export type FetchLootBagQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type FetchLootBagQuery = { __typename?: 'Query', lootBag: { __typename?: 'LootBag', items: Array<{ __typename?: 'LootItem', item: { __typename?: 'Item', name: string } }> } };
+
 export type CreateLootBagMutationVariables = Exact<{
   items: Array<Scalars['String']> | Scalars['String'];
 }>;
@@ -74,6 +81,45 @@ export type CreateLootBagMutationVariables = Exact<{
 export type CreateLootBagMutation = { __typename?: 'Mutation', createLootBag: { __typename?: 'LootBag', id: number, items: Array<{ __typename?: 'LootItem', item: { __typename?: 'Item', name: string } }> } };
 
 
+export const FetchLootBagDocument = gql`
+    query FetchLootBag($id: Int!) {
+  lootBag(input: {id: $id}) {
+    items {
+      item {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFetchLootBagQuery__
+ *
+ * To run a query within a React component, call `useFetchLootBagQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchLootBagQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchLootBagQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFetchLootBagQuery(baseOptions: Apollo.QueryHookOptions<FetchLootBagQuery, FetchLootBagQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchLootBagQuery, FetchLootBagQueryVariables>(FetchLootBagDocument, options);
+      }
+export function useFetchLootBagLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchLootBagQuery, FetchLootBagQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchLootBagQuery, FetchLootBagQueryVariables>(FetchLootBagDocument, options);
+        }
+export type FetchLootBagQueryHookResult = ReturnType<typeof useFetchLootBagQuery>;
+export type FetchLootBagLazyQueryHookResult = ReturnType<typeof useFetchLootBagLazyQuery>;
+export type FetchLootBagQueryResult = Apollo.QueryResult<FetchLootBagQuery, FetchLootBagQueryVariables>;
 export const CreateLootBagDocument = gql`
     mutation CreateLootBag($items: [String!]!) {
   createLootBag(input: {items: $items}) {
