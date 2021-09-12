@@ -1,0 +1,27 @@
+.header-links {
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-links a {
+  text-decoration: none;
+}
+
+.nav-links {
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-links h3 {
+  margin-left: 16px;
+}
+
+.subtitle {
+  margin-bottom: 130px;
+}

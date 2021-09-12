@@ -5,9 +5,29 @@ body {
   font-family: "EB Garamond", serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h3, a {
+  color: #a3a3a3;
+  font-size: 18px;
+}
+
 .App {
   display: flex;
   justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 textarea, input {
