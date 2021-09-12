@@ -7,6 +7,8 @@ export const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
 const MAX_INDEX = TOTAL_ROWS - 1;
 const MAX_CHARACTERS = 45;
+const URL_PREFIX = 'lootgen.party/';
+const FULL_URL_PREFIX = `https://www.${URL_PREFIX}`;
 
 interface Props {
   itemNames?: string[];
@@ -42,6 +44,12 @@ const LootBag: React.FC<Props> = ({
 
   const lootBagId = data?.createLootBag.id ?? bagId;
   const lockInputs = locked || lootBagId;
+
+  const showShareButtons = lootBagId !== undefined;
+
+  const getShareURL = (fullUrl = false) => {
+    return `${fullUrl ? FULL_URL_PREFIX : URL_PREFIX}loot/${lootBagId}`;
+  };
 
   return (
     <div className="loot-view">
@@ -124,6 +132,7 @@ const LootBag: React.FC<Props> = ({
           />
         ))}
       </div>
+
       {emptyRows < TOTAL_ROWS && lootBagId === undefined && (
         <div
           className={
@@ -139,6 +148,27 @@ const LootBag: React.FC<Props> = ({
           }}
         >
           Generate
+        </div>
+      )}
+
+      {showShareButtons && (
+        <div className="share-buttons">
+          <div
+            className="button share-button"
+            onClick={() => {
+              const textArea = document.createElement('textarea');
+              textArea.style.display = 'none';
+              textArea.value = getShareURL(true);
+              document.body.appendChild(textArea);
+              textArea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textArea);
+            }}
+          >
+            {getShareURL()}
+          </div>
+          <div className="button tweet-button">Tweet</div>
+          <div className="button download-button">Download</div>
         </div>
       )}
     </div>
