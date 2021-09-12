@@ -41,6 +41,7 @@ const LootBag: React.FC<Props> = ({
   const [createLootBag, { data, loading }] = useCreateLootBagMutation();
 
   const lootBagId = data?.createLootBag.id ?? bagId;
+  const lockInputs = locked || lootBagId;
 
   return (
     <div className="loot-view">
@@ -52,7 +53,7 @@ const LootBag: React.FC<Props> = ({
       <div className="loot-items">
         {items.map((item, index) => (
           <input
-            className={locked || bagId ? 'disabled' : ''}
+            className={lockInputs ? 'disabled' : ''}
             key={`loot-item-${index}`}
             maxLength={MAX_CHARACTERS}
             spellCheck={false}
@@ -77,7 +78,7 @@ const LootBag: React.FC<Props> = ({
               }
             }}
             onFocus={() => {
-              if (locked) {
+              if (lockInputs) {
                 inputRefs.current[index].blur();
                 return;
               }
