@@ -27,6 +27,7 @@ h3, a {
   display: flex;
   flex: 1;
   justify-content: center;
+  position: relative;
 }
 
 .row {
@@ -44,6 +45,14 @@ textarea, input {
   width: 355px;
   display: flex;
   flex-direction: column;
+}
+
+.overlay {
+  position: absolute;
+  background-color: #131313;
+  opacity: 0.9;
+  width: 100vw;
+  height: 100vh;
 }
 
 .button {

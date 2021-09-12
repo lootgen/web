@@ -11,7 +11,7 @@ const NotFoundLootBag: React.FC = () => {
     'Try creating your own loot',
     'By clicking the button below',
   ];
-  return <LootBag itemNames={items} bagId={404} locked />;
+  return <LootBag itemNames={items} bagId={404} locked hideShareButtons />;
 };
 
 export default NotFoundLootBag;

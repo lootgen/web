@@ -14,12 +14,16 @@ interface Props {
   itemNames?: string[];
   bagId?: number;
   locked?: boolean;
+  hideShareButtons?: boolean;
+  onLootCreate?: () => void;
 }
 
 const LootBag: React.FC<Props> = ({
   itemNames = ['', '', '', '', '', '', '', ''],
   bagId,
   locked = false,
+  hideShareButtons = false,
+  onLootCreate = () => {},
 }: Props) => {
   const [items, setItems] = useState(itemNames);
   const [pasted, setPasted] = useState(false);
@@ -42,10 +46,16 @@ const LootBag: React.FC<Props> = ({
 
   const [createLootBag, { data, loading }] = useCreateLootBagMutation();
 
+  useEffect(() => {
+    if (data?.createLootBag.id) {
+      onLootCreate();
+    }
+  }, [data?.createLootBag.id]);
+
   const lootBagId = data?.createLootBag.id ?? bagId;
   const lockInputs = locked || lootBagId;
 
-  const showShareButtons = lootBagId !== undefined;
+  const showShareButtons = !hideShareButtons && lootBagId !== undefined;
 
   const getShareURL = (fullUrl = false) => {
     return `${fullUrl ? FULL_URL_PREFIX : URL_PREFIX}loot/${lootBagId}`;
@@ -157,7 +167,7 @@ const LootBag: React.FC<Props> = ({
             className="button share-button"
             onClick={() => {
               const textArea = document.createElement('textarea');
-              textArea.style.display = 'none';
+              textArea.style.opacity = '0';
               textArea.value = getShareURL(true);
               document.body.appendChild(textArea);
               textArea.select();
