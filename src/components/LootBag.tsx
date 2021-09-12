@@ -127,7 +127,9 @@ const LootBag: React.FC<Props> = ({
       {emptyRows < TOTAL_ROWS && lootBagId === undefined && (
         <div
           className={
-            hasEmptyItem || loading ? 'submit-button disabled' : 'submit-button'
+            hasEmptyItem || loading
+              ? 'submit-button button disabled'
+              : 'submit-button button'
           }
           onClick={() => {
             createLootBag({ variables: { items } });

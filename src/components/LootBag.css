@@ -40,3 +40,9 @@
 .loot-items input.disabled {
   cursor: default;
 }
+
+.submit-button {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+}

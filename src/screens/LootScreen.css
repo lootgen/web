@@ -1,0 +1,6 @@
+.loot-footer {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

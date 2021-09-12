@@ -16,26 +16,29 @@ textarea, input {
   font-family: "EB Garamond", serif;
 }
 
-.submit-button {
+.container {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
   background-color: #ffffff;
   font-weight: 600;
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
   font-size: 18px;
   padding: 6px 10px;
   cursor: pointer;
 }
 
-.submit-button.disabled {
+.button.disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-.submit-button.disabled:active {
+.button.disabled:active {
   background-color: #ffffff;
 }
 
-.submit-button:active {
+.button:active {
   background-color: #888888;
 }

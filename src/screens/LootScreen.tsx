@@ -1,5 +1,7 @@
+import './LootScreen.css';
+
 import { ApolloError } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import LootBag, { TOTAL_ROWS } from '../components/LootBag';
 import { useFetchLootBagQuery } from '../generated/graphql';
@@ -24,6 +26,7 @@ const isItemNotFoundError = (error: ApolloError, id: number) => {
 };
 
 const LootScreen: React.FC<Props> = () => {
+  const history = useHistory();
   const { id: idValue } = useParams<{ id: string }>();
   const id = parseInt(idValue);
   const { data, error } = useFetchLootBagQuery({ variables: { id } });
@@ -41,10 +44,22 @@ const LootScreen: React.FC<Props> = () => {
   }
 
   return (
-    <div>
-      {items.length === TOTAL_ROWS && (
-        <LootBag itemNames={items} bagId={bagId} />
-      )}
+    <div className="container">
+      <div>
+        {items.length === TOTAL_ROWS && (
+          <LootBag itemNames={items} bagId={bagId} />
+        )}
+      </div>
+      <div className="loot-footer">
+        <div
+          className={'button'}
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          Make your own
+        </div>
+      </div>
     </div>
   );
 };
