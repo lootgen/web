@@ -1,7 +1,7 @@
 import './LootBag.css';
 
-import { TwitterShareButton } from 'react-share';
 import React, { useEffect, useRef, useState } from 'react';
+
 import { useCreateLootBagMutation } from '../generated/graphql';
 
 export const TOTAL_ROWS = 8;
@@ -60,6 +60,13 @@ const LootBag: React.FC<Props> = ({
 
   const getShareURL = (fullUrl = false) => {
     return `${fullUrl ? FULL_URL_PREFIX : URL_PREFIX}loot/${lootBagId}`;
+  };
+
+  const getTwitterShareURL = () => {
+    const shareURL = encodeURIComponent(getShareURL(true));
+    const title = encodeURIComponent('Generated #loot');
+    const twitterAccount = 'loot_gen';
+    return `https://twitter.com/intent/tweet?url=${shareURL}&text=${title}&via=${twitterAccount}`;
   };
 
   return (
@@ -178,16 +185,13 @@ const LootBag: React.FC<Props> = ({
           >
             {getShareURL()}
           </div>
-          <div className="button tweet-button">
-            <TwitterShareButton
-              className="twitter-share-button"
-              title="Generated #loot"
-              via="loot_gen"
-              url={getShareURL(true)}
-              resetButtonStyle
-            >
-              Tweet
-            </TwitterShareButton>
+          <div
+            className="button tweet-button"
+            onClick={() => {
+              window.open(getTwitterShareURL());
+            }}
+          >
+            Tweet
           </div>
           <div className="button download-button">Download</div>
         </div>
