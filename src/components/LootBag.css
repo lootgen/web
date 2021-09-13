@@ -70,6 +70,10 @@
   overflow: hidden;
 }
 
+.twitter-share-button {
+  margin: 0;
+}
+
 @media (min-width: 641px) {
   .item-counter {
     top: 24px;

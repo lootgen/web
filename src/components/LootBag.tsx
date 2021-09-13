@@ -1,5 +1,6 @@
 import './LootBag.css';
 
+import { TwitterShareButton } from 'react-share';
 import React, { useEffect, useRef, useState } from 'react';
 import { useCreateLootBagMutation } from '../generated/graphql';
 
@@ -177,7 +178,17 @@ const LootBag: React.FC<Props> = ({
           >
             {getShareURL()}
           </div>
-          <div className="button tweet-button">Tweet</div>
+          <div className="button tweet-button">
+            <TwitterShareButton
+              className="twitter-share-button"
+              title="Generated #loot"
+              via="loot_gen"
+              url={getShareURL(true)}
+              resetButtonStyle
+            >
+              Tweet
+            </TwitterShareButton>
+          </div>
           <div className="button download-button">Download</div>
         </div>
       )}
