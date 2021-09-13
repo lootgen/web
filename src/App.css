@@ -49,8 +49,8 @@ textarea, input {
 
 .overlay {
   position: absolute;
-  background-color: #131313;
-  opacity: 0.9;
+  background-color: #161616;
+  opacity: 0.8;
   width: 100vw;
   height: 100vh;
 }
