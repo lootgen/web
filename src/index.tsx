@@ -9,10 +9,10 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-export const GRAPHQL_API_URL =
-  process.env.REACT_APP_GRAPHQL_API_URL ?? 'http://localhost:4000/graphql';
-export const REST_API_URL =
-  process.env.REACT_APP_REST_API_URL ?? 'http://localhost:4000';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? 'http://localhost:4000';
+
+export const GRAPHQL_API_URL = `${SERVER_URL}/graphql`;
+export const REST_API_URL = SERVER_URL;
 
 const APOLLO_CLIENT = new ApolloClient({
   uri: GRAPHQL_API_URL,
