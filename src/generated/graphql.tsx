@@ -26,23 +26,23 @@ export type FetchLootBagInput = {
 
 export type Item = {
   __typename?: 'Item';
+  created: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  created: Scalars['DateTime'];
 };
 
 export type LootBag = {
   __typename?: 'LootBag';
-  id: Scalars['Int'];
   created: Scalars['DateTime'];
+  id: Scalars['Int'];
   items: Array<LootItem>;
 };
 
 export type LootItem = {
   __typename?: 'LootItem';
+  bag: LootBag;
   id: Scalars['ID'];
   item: Item;
-  bag: LootBag;
   order: Scalars['Int'];
 };
 

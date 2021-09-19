@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://MacBook-ESQ.local:4000"
+schema: "http://MacBook-ESQ.local:4000/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:

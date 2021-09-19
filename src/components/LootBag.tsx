@@ -3,6 +3,7 @@ import './LootBag.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useCreateLootBagMutation } from '../generated/graphql';
+import { REST_API_URL } from '..';
 
 export const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
@@ -193,7 +194,23 @@ const LootBag: React.FC<Props> = ({
           >
             Tweet
           </div>
-          <div className="button download-button">Download</div>
+          <div
+            className="button download-button"
+            onClick={async () => {
+              const element = document.createElement('a');
+              const response = await fetch(
+                `${REST_API_URL}/loot/${lootBagId}/image.png`
+              );
+              const data = await response.blob();
+              element.href = URL.createObjectURL(data);
+              element.download = `loot-${lootBagId}.png`;
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            }}
+          >
+            Download
+          </div>
         </div>
       )}
     </div>
