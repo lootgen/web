@@ -9,28 +9,27 @@ import CreateLootScreen from './screens/CreateLootScreen';
 import LootScreen from './screens/LootScreen';
 import NotFoundScreen from './screens/NotFoundScreen';
 
-export const DimBackgroundContext = createContext(() => {});
+export const OverlayContext = createContext({
+  showOverlay: false,
+  setShowOverlay: (_show: boolean) => {},
+});
 
 function App(): JSX.Element {
-  const [dimBackground, setDimBackground] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   return (
     <div className="App">
-      {dimBackground && <div className="overlay" />}
+      {showOverlay && <div className="overlay" />}
       <div className="container">
         <LootHeader />
-        <DimBackgroundContext.Provider
-          value={() => {
-            setDimBackground(true);
-          }}
-        >
+        <OverlayContext.Provider value={{ showOverlay, setShowOverlay }}>
           <Switch>
             <Route exact path="/" component={CreateLootScreen} />
             <Route path="/loot/:id" component={LootScreen} />
             <Route path="/about" component={AboutScreen} />
             <Route path="*" component={NotFoundScreen} />
           </Switch>
-        </DimBackgroundContext.Provider>
+        </OverlayContext.Provider>
       </div>
     </div>
   );

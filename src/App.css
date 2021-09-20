@@ -82,6 +82,13 @@ textarea, input {
   background-color: #888888;
 }
 
+.loot-footer {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 @media (min-width: 641px) {
   h1 {
     font-size: 48px;

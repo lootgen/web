@@ -1,5 +1,3 @@
-import './LootScreen.css';
-
 import { ApolloError } from '@apollo/client';
 import { useHistory, useParams } from 'react-router-dom';
 

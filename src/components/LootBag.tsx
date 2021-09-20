@@ -13,13 +13,18 @@ const MAX_CHARACTERS = 45;
 const URL_PREFIX = 'lootgen.party/';
 const FULL_URL_PREFIX = `https://www.${URL_PREFIX}`;
 
+export interface LootBagData {
+  id: number;
+  items: string[];
+}
+
 interface Props {
   itemNames?: string[];
   bagId?: number;
   locked?: boolean;
   hideShareButtons?: boolean;
   itemsOnly?: boolean;
-  onLootCreate?: () => void;
+  onLootCreate?: (lootBag: LootBagData) => void;
 }
 
 const LootBag: React.FC<Props> = ({
@@ -54,7 +59,10 @@ const LootBag: React.FC<Props> = ({
 
   useEffect(() => {
     if (data?.createLootBag.id) {
-      onLootCreate();
+      const items: string[] = data.createLootBag.items.map(
+        (item) => item.item.name
+      );
+      onLootCreate({ id: data.createLootBag.id, items });
     }
   }, [data?.createLootBag.id]);
 

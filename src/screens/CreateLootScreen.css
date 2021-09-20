@@ -1,3 +1,13 @@
+.make-more-button {
+  z-index: 0;
+  animation: buttonFadeIn 0.5s ease-in;
+}
+
+@keyframes buttonFadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
 .more-lootgen {
   margin-top: 80px;
   position: relative;
