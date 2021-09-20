@@ -15,7 +15,7 @@ const AboutScreen: React.FC = () => {
             'Beware though, they’re not stored on-chain',
             'Yet',
           ]}
-          bagId={0}
+          itemsOnly
           hideShareButtons
           locked
         />

@@ -18,6 +18,7 @@ interface Props {
   bagId?: number;
   locked?: boolean;
   hideShareButtons?: boolean;
+  itemsOnly?: boolean;
   onLootCreate?: () => void;
 }
 
@@ -26,6 +27,7 @@ const LootBag: React.FC<Props> = ({
   bagId,
   locked = false,
   hideShareButtons = false,
+  itemsOnly = false,
   onLootCreate = () => {},
 }: Props) => {
   const [items, setItems] = useState(itemNames);
@@ -84,11 +86,15 @@ const LootBag: React.FC<Props> = ({
 
   return (
     <div className="loot-view">
-      <div className={validRows === 0 ? 'item-counter empty' : 'item-counter'}>
-        {lootBagId === undefined
-          ? `${validRows}/${MAX_INDEX + 1}`
-          : `#${lootBagId}`}
-      </div>
+      {itemsOnly === false && (
+        <div
+          className={validRows === 0 ? 'item-counter empty' : 'item-counter'}
+        >
+          {lootBagId === undefined
+            ? `${validRows}/${MAX_INDEX + 1}`
+            : `#${lootBagId}`}
+        </div>
+      )}
       <div className="loot-items">
         {items.map((item, index) => (
           <input
@@ -164,23 +170,25 @@ const LootBag: React.FC<Props> = ({
         ))}
       </div>
 
-      {emptyRows < TOTAL_ROWS && lootBagId === undefined && (
-        <div
-          className={
-            hasEmptyItem || loading
-              ? 'submit-button button disabled'
-              : 'submit-button button'
-          }
-          onClick={() => {
-            if (hasEmptyItem) {
-              return;
+      {itemsOnly === false &&
+        emptyRows < TOTAL_ROWS &&
+        lootBagId === undefined && (
+          <div
+            className={
+              hasEmptyItem || loading
+                ? 'submit-button button disabled'
+                : 'submit-button button'
             }
-            createLootBag({ variables: { items } });
-          }}
-        >
-          Generate
-        </div>
-      )}
+            onClick={() => {
+              if (hasEmptyItem) {
+                return;
+              }
+              createLootBag({ variables: { items } });
+            }}
+          >
+            Generate
+          </div>
+        )}
 
       {showShareButtons && (
         <div className="share-button-container">
