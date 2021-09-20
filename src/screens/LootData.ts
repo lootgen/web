@@ -12,7 +12,7 @@ export const lootBags = [
 
   [
     'Whoa, whoa, whoa',
-    'There’s still plenty of meat on that bone',
+    "There's still plenty of meat on that bone",
     'Now you take this home',
     'Throw it in a pot',
     'Add some broth',
