@@ -4,6 +4,7 @@ import React, { createContext, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import LootHeader from './components/LootHeader';
+import AboutScreen from './screens/AboutScreen';
 import CreateLootScreen from './screens/CreateLootScreen';
 import LootScreen from './screens/LootScreen';
 import NotFoundScreen from './screens/NotFoundScreen';
@@ -26,6 +27,7 @@ function App(): JSX.Element {
           <Switch>
             <Route exact path="/" component={CreateLootScreen} />
             <Route path="/loot/:id" component={LootScreen} />
+            <Route path="/about" component={AboutScreen} />
             <Route path="*" component={NotFoundScreen} />
           </Switch>
         </DimBackgroundContext.Provider>
