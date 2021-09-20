@@ -27,7 +27,7 @@
 }
 
 .subtitle {
-  margin-bottom: 134px;
+  margin-bottom: 80px;
 }
 
 @media (min-width: 641px) {
@@ -37,9 +37,5 @@
 
   .header-links {
     margin-bottom: 16px;
-  }
-
-  .subtitle {
-    margin-bottom: 130px;
   }
 }
