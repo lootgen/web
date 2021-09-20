@@ -1,5 +1,7 @@
 .more-lootgen {
   margin-top: 80px;
+  position: relative;
+  z-index: -1;
 }
 
 .more-lootgen p {
