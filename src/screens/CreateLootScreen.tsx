@@ -45,6 +45,8 @@ const CreateLootScreen: React.FC = () => {
       )}
 
       <div className="more-lootgen">
+        <p>More LootGen:</p>
+
         {createdLootBags.map((lootBag) => (
           <LootBag
             key={`created-loot-${lootBag.id}`}
@@ -55,7 +57,6 @@ const CreateLootScreen: React.FC = () => {
           />
         ))}
 
-        <p>More LootGen:</p>
         {lootBags.map((lootBag, index) => (
           <LootBag
             key={`loot-${index}`}
