@@ -32,7 +32,7 @@ const CreateLootScreen: React.FC = () => {
                   (lootBag) => lootBag.id === pendingLootBag.id
                 ) === undefined
               ) {
-                setCreatedLootBags([...createdLootBags, pendingLootBag]);
+                setCreatedLootBags([pendingLootBag, ...createdLootBags]);
               }
               setPendingLootBag(undefined);
               setCreatedCount(createdCount + 1);
