@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useCreateLootBagMutation } from '../generated/graphql';
 import { REST_API_URL } from '..';
+import { setTimeout } from 'timers';
 
 export const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
@@ -29,6 +30,7 @@ const LootBag: React.FC<Props> = ({
 }: Props) => {
   const [items, setItems] = useState(itemNames);
   const [pasted, setPasted] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const firstEmptyIndex = items.findIndex((value) => value.length === 0);
   const hasEmptyItem = firstEmptyIndex !== -1;
   const inputRefs = useRef<Array<HTMLInputElement>>([]);
@@ -53,6 +55,16 @@ const LootBag: React.FC<Props> = ({
       onLootCreate();
     }
   }, [data?.createLootBag.id]);
+
+  useEffect(() => {
+    if (linkCopied) {
+      const timer = setTimeout(() => {
+        setLinkCopied(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [linkCopied]);
 
   const lootBagId = data?.createLootBag.id ?? bagId;
   const lockInputs = locked || lootBagId;
@@ -171,45 +183,49 @@ const LootBag: React.FC<Props> = ({
       )}
 
       {showShareButtons && (
-        <div className="share-buttons">
-          <div
-            className="button share-button"
-            onClick={() => {
-              const textArea = document.createElement('textarea');
-              textArea.style.opacity = '0';
-              textArea.value = getShareURL(true);
-              document.body.appendChild(textArea);
-              textArea.select();
-              document.execCommand('copy');
-              document.body.removeChild(textArea);
-            }}
-          >
-            {getShareURL()}
-          </div>
-          <div
-            className="button tweet-button"
-            onClick={() => {
-              window.open(getTwitterShareURL());
-            }}
-          >
-            Tweet
-          </div>
-          <div
-            className="button download-button"
-            onClick={async () => {
-              const element = document.createElement('a');
-              const response = await fetch(
-                `${REST_API_URL}/loot/${lootBagId}/image.png`
-              );
-              const data = await response.blob();
-              element.href = URL.createObjectURL(data);
-              element.download = `loot-${lootBagId}.png`;
-              document.body.appendChild(element);
-              element.click();
-              document.body.removeChild(element);
-            }}
-          >
-            Download
+        <div className="share-button-container">
+          {linkCopied && <div className="copied-notification">Copied!</div>}
+          <div className="share-buttons">
+            <div
+              className="button share-button"
+              onClick={() => {
+                const textArea = document.createElement('textarea');
+                textArea.style.opacity = '0';
+                textArea.value = getShareURL(true);
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                setLinkCopied(true);
+              }}
+            >
+              {getShareURL()}
+            </div>
+            <div
+              className="button tweet-button"
+              onClick={() => {
+                window.open(getTwitterShareURL());
+              }}
+            >
+              Tweet
+            </div>
+            <div
+              className="button download-button"
+              onClick={async () => {
+                const element = document.createElement('a');
+                const response = await fetch(
+                  `${REST_API_URL}/loot/${lootBagId}/image.png`
+                );
+                const data = await response.blob();
+                element.href = URL.createObjectURL(data);
+                element.download = `loot-${lootBagId}.png`;
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+              }}
+            >
+              Download
+            </div>
           </div>
         </div>
       )}

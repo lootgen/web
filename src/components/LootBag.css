@@ -48,12 +48,31 @@
   right: 10px;
 }
 
+.share-button-container {
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.copied-notification {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  margin-left: 6px;
+  animation: fadeInOut linear 3.5s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {opacity: 0;}
+  7% {opacity: 1;}
+  93% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
 .share-buttons {
   display: flex;
   flex-direction: row;
-  padding: 0 10px;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .share-buttons .button {
@@ -105,9 +124,12 @@
     right: 24px;
   }
 
-  .share-buttons {
-    margin-bottom: 24px;
+  .share-button-container {
     padding: 0 24px;
+    margin-bottom: 24px;
   }
 
+  .copied-notification {
+    font-size: 18px;
+  }
 }
