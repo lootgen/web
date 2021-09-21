@@ -3,7 +3,7 @@ import './index.css';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import HttpsRedirect from 'react-https-redirect';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
@@ -22,11 +22,13 @@ const APOLLO_CLIENT = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={APOLLO_CLIENT}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>
+    <HttpsRedirect>
+      <ApolloProvider client={APOLLO_CLIENT}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ApolloProvider>
+    </HttpsRedirect>
   </React.StrictMode>,
   document.getElementById('root')
 );
