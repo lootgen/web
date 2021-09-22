@@ -1,10 +1,10 @@
 import './LootBag.css';
 
 import React, { useEffect, useRef, useState } from 'react';
-
-import { useCreateLootBagMutation } from '../generated/graphql';
-import { REST_API_URL } from '..';
 import { setTimeout } from 'timers';
+
+import { fonts } from '../fonts';
+import { useCreateLootBagMutation } from '../generated/graphql';
 
 export const TOTAL_ROWS = 8;
 const MIN_INDEX = 0;
@@ -90,6 +90,21 @@ const LootBag: React.FC<Props> = ({
     const title = encodeURIComponent('Generated #loot');
     const twitterAccount = 'loot_gen';
     return `https://twitter.com/intent/tweet?url=${shareURL}&text=${title}&via=${twitterAccount}`;
+  };
+
+  const createSVG = (): string => {
+    const svgStrings = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">',
+      `<defs><style type="text/css">${fonts}</style></defs>`,
+      '<style>.base { fill: white; font-family: "EB Garamond", sans-serif; font-size: 24px; }</style><rect width="100%" height="100%" fill="black" />',
+    ];
+    items.forEach((item, index) => {
+      svgStrings.push(`<text x="24" y="${(index + 1) * 31}" class="base">`);
+      svgStrings.push(item);
+      svgStrings.push('</text>');
+    });
+    svgStrings.push('</svg>');
+    return svgStrings.join('');
   };
 
   return (
@@ -228,16 +243,30 @@ const LootBag: React.FC<Props> = ({
             <div
               className="button download-button"
               onClick={async () => {
-                const element = document.createElement('a');
-                const response = await fetch(
-                  `${REST_API_URL}/loot/${lootBagId}/image.png`
-                );
-                const data = await response.blob();
-                element.href = URL.createObjectURL(data);
-                element.download = `loot-${lootBagId}.png`;
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
+                const blob = new Blob([createSVG()], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+
+                const img = new Image();
+                img.src = url;
+                img.onload = () => {
+                  setTimeout(() => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 1024;
+                    canvas.height = 1024;
+                    const context = canvas.getContext('2d');
+                    document.body.appendChild(canvas);
+                    if (context) {
+                      context.drawImage(img, 0, 0);
+                      const element = document.createElement('a');
+                      element.href = canvas.toDataURL();
+                      element.download = `loot-${lootBagId}.png`;
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                      document.body.removeChild(canvas);
+                    }
+                  }, 1000);
+                };
               }}
             >
               Download

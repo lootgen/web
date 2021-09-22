@@ -12,7 +12,6 @@ import reportWebVitals from './reportWebVitals';
 const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? 'http://localhost:4000';
 
 export const GRAPHQL_API_URL = `${SERVER_URL}/graphql`;
-export const REST_API_URL = SERVER_URL;
 
 const APOLLO_CLIENT = new ApolloClient({
   uri: GRAPHQL_API_URL,
