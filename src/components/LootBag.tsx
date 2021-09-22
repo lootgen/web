@@ -94,12 +94,14 @@ const LootBag: React.FC<Props> = ({
 
   const createSVG = (): string => {
     const svgStrings = [
-      '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">',
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" preserveAspectRatio="xMinYMin meet" viewBox="0 0 480 480">',
       `<defs><style type="text/css">${fonts}</style></defs>`,
-      '<style>.base { fill: white; font-family: "EB Garamond", sans-serif; font-size: 24px; }</style><rect width="100%" height="100%" fill="black" />',
+      '<style>.base { fill: white; font-family: "EB Garamond", serif; font-size: 24px; }</style><rect width="100%" height="100%" fill="black" />',
     ];
     items.forEach((item, index) => {
-      svgStrings.push(`<text x="24" y="${(index + 1) * 31}" class="base">`);
+      svgStrings.push(
+        `<text x="24" y="${22 + (index + 1) * 38}" class="base">`
+      );
       svgStrings.push(item);
       svgStrings.push('</text>');
     });
