@@ -35,7 +35,7 @@ import fs from 'fs';
       });
     });
 
-    app.get('*', (req, res) => {
+    app.get('/*', (req, res) => {
       fs.readFile(indexPath, 'utf-8', (err, html) => {
         if (err) {
           console.error('Error during file reading', err);
