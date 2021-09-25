@@ -96,8 +96,11 @@ const LootBag: React.FC<Props> = ({
     const svgStrings = [
       '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" preserveAspectRatio="xMinYMin meet" viewBox="0 0 480 480">',
       `<defs><style type="text/css">${fonts}</style></defs>`,
-      '<style>.base { fill: white; font-family: "EB Garamond", serif; font-size: 24px; }</style><rect width="100%" height="100%" fill="black" />',
+      '<style>.base { fill: white; font-family: "EB Garamond", serif; font-size: 24px; } .index { font-size: 18px; }</style><rect width="100%" height="100%" fill="black" />',
     ];
+    svgStrings.push(
+        `<text text-anchor="end" x="${480 - 24}" y="38" class="base index">#${lootBagId}</text>`
+    )
     items.forEach((item, index) => {
       svgStrings.push(
         `<text x="24" y="${22 + (index + 1) * 38}" class="base">`
