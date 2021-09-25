@@ -64,7 +64,7 @@ const LootBag: React.FC<Props> = ({
       );
       onLootCreate({ id: data.createLootBag.id, items });
     }
-  }, [data?.createLootBag.id]);
+  }, [data?.createLootBag.id, data?.createLootBag.items, onLootCreate]);
 
   useEffect(() => {
     if (linkCopied) {

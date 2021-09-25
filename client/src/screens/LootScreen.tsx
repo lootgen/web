@@ -1,8 +1,9 @@
 import { ApolloError } from '@apollo/client';
+import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import LootBag, { TOTAL_ROWS } from '../components/LootBag';
-import { useFetchLootBagQuery } from '../generated/graphql';
+import { useFetchLootBagLazyQuery } from '../generated/graphql';
 import NotFoundScreen from './NotFoundScreen';
 
 interface Props {
@@ -27,7 +28,18 @@ const LootScreen: React.FC<Props> = () => {
   const history = useHistory();
   const { id: idValue } = useParams<{ id: string }>();
   const id = parseInt(idValue);
-  const { data, error } = useFetchLootBagQuery({ variables: { id } });
+  const isIdValid = Number.isInteger(id);
+  const [fetchLootBag, { data, error }] = useFetchLootBagLazyQuery();
+
+  useEffect(() => {
+    if (isIdValid) {
+      fetchLootBag({ variables: { id } });
+    }
+  }, [fetchLootBag, id, isIdValid])
+
+  if (!isIdValid) {
+    return <NotFoundScreen />;
+  }
 
   let items: string[] = [];
   const bagId = id;
